@@ -22,3 +22,14 @@ let profession = "Pilot"
 //*this is called type inference: compiler assumesthe type automatically based on assigned value
 //*above the value is string hence the type assumed is string
 console.log(typeof profession);
+
+
+// * Any type : represents any type (type checking is disabled) 
+//!use the above sparingly as it makes it harder to catch type related errors
+let color : any = "blue"
+console.log("==============any type===============");
+console.log(typeof color);
+color = 22
+console.log(typeof color);
+color = 0
+console.log(typeof color);
