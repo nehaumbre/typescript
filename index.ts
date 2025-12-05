@@ -3,7 +3,7 @@ type Person = {
 }
 
 const person : Person = {
-    name : "BOB"
+    name : "Team"
 }
 
 console.log(person.name);

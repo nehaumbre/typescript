@@ -11,7 +11,7 @@ npm install -g ts-node
 ```
 * INDEX
 ```
-Annotations In Depth
+* Annotations In Depth
 * Type Inference
 * Any Type
 * Function Parameter Annotations
