@@ -31,5 +31,5 @@ console.log("==============any type===============");
 console.log(typeof color);
 color = 22
 console.log(typeof color);
-color = 0
+color = true
 console.log(typeof color);
