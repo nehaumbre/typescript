@@ -11,10 +11,10 @@ npm install -g ts-node
 ```
 * INDEX
 ```
-* Annotations In Depth
+* Annotations In Depth 
 * Type Inference
 * Any Type
-* Function Parameter Annotations
+* Function Parameter Annotations 
 * Default Params Values
 * Function Return Annotations
 * Void Functions
