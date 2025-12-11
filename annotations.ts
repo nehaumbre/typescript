@@ -60,3 +60,27 @@ function animeGreet(name: string = "User"){
 console.log("Default Params Values==========");
 animeGreet()
 animeGreet("Lev")
+
+//*Function Return Annotations
+function double(x: number): number {
+    return x*x;
+}
+let doubleRes = double(3)
+console.log("Function Return Annotations======================");
+console.log(doubleRes);
+
+//arrow function
+
+let addX = (x:number , y:number) : number =>  x+y
+let addXres = addX(8,9)
+console.log(addXres);
+
+//*VOID :represents absence of a value.
+//*  often used for functions that do not have return value
+
+function message(msg : string) {
+    console.log(`this is my ${msg}`);    
+}
+
+console.log("VOID example==============");
+message("HELLO")
