@@ -164,3 +164,51 @@ function isHero(movie: SuperHero & Cast) {
 }
 
 isHero(MovieIronman);
+
+
+//*Intersection Conflicts (Same Property Name)
+
+type A = {
+  //value: string; //causes Intersection conflict
+  value: string | number;
+};
+
+type B = {
+  value: number ;
+};
+
+type C = A & B
+
+let obj: C = {
+    value :0 //works
+  //value: "hello", //If I use an intersection, the value cannot be string, but can be number, because number is the common type.
+};
+
+console.log(obj);
+
+
+//*interface extends vs type &
+//Using Interface
+interface Hooman {
+  name: string;
+}
+
+interface Herro extends Hooman {
+  power: string;
+}
+
+// Using type + intersection
+type Company = {
+    name: string
+}
+
+type Employee = Company & {
+    tenure : number
+}
+
+const emp1: Employee = {
+    name : "JCB",
+    tenure : 6
+}
+
+console.log(`I am working at ${emp1.name} for about ${emp1.tenure} years`);
