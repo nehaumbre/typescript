@@ -24,6 +24,8 @@ console.log("factory function example====");
 console.log(p1,p2);
 
 //*using type aliases for clearer version of above code
+//*Type aliases in TypeScript are a way to give a custom name to a type.
+//*They help make your code cleaner, reusable, and easier to understand.
 
 type Address ={street: string, lane: string, pin: number}
 
@@ -37,3 +39,55 @@ function address(street: string, lane: string, pin: number) : Address {
 }
 let address1 = address("C.G street", "lane 20", 56551)
 console.log(`my address is ${address1.street}, ${address1.lane},pin :${address1.pin}`);
+
+// type Anime = {
+//     name: string,
+//     aired: number,
+//     genre: string
+// }
+
+// function animeStream(name: string, aired: number, genre: string) : Anime {
+//     return {
+//         name, aired, genre
+//     }
+// }
+
+// const anime2 = animeStream("One Piece", 1999, "Adventure");
+// const anime3 = animeStream("Attack on Titan", 2013, "Dark Fantasy");
+
+// console.log(anime2);
+// console.log(anime3.genre);
+
+//* rewriting above code
+
+type Anime = {
+    readonly name: string, 
+    //*readonly properties can be set once 
+    // *(usually when the object is created) and cannot be changed later
+    //*They are perfect for IDs, creation dates, constants, API data, etc.
+    aired: number,
+    genre: string,
+    episodes?: number //* optional property
+}
+
+function animeStream(anime:Anime) : Anime {
+    return anime
+}
+
+const anime2 = animeStream({
+  name: "One Piece",
+  aired: 1999,
+  genre: "Adventure"
+});
+
+const anime3 = animeStream({
+  name: "Attack on Titan",
+  aired: 2013,
+  genre: "Dark Fantasy",
+  episodes: 60
+});
+
+console.log(anime2);
+console.log(anime3.episodes);
+
+//anime3.name = "NAruto"  //!Cannot assign to 'name' because it is a read-only property.
