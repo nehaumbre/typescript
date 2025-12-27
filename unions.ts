@@ -29,6 +29,11 @@ const yourName: Anime = {
   duration : 106
 }
 
+const suzume: Anime = {
+  type: "movie",
+  name : "SUZUME",
+  duration : 90
+}
 //!INVALD CODE BELOW
 // const aot: Anime = {
 //   type: "tv",
@@ -41,3 +46,4 @@ const logAnime = (a : Anime) =>
 
 logAnime(naruto)
 logAnime(yourName)
+logAnime(suzume)
