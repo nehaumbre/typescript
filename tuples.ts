@@ -50,3 +50,18 @@ let status: [number, string] = [200, "OK"];
 console.log(status);
 status = [500, "Bad Request"]
 console.log(status);
+
+//destructuring in tuples
+type candidate= [string, number]
+
+let person : candidate =["giovani", 32]
+
+const [name , age] = person
+
+console.log(name +" "+ age)
+
+const result : [string, number , boolean] = ["success", 200 , true]
+
+const [message ,code , isScuccess] = result //*Destructuring
+
+console.log(`${message} ${code}`);
