@@ -30,19 +30,39 @@ action({ color: "yellow" });
 action({ color: "green" });
 
 type httpResponse =
-  | { statusCode: "200", message: "OK" }
-  | { statusCode: "201", message: "created" }
-  | { statusCode: "404", message: "Not found" }
-  | { statusCode: "500", message: "server error" }
+  | { statusCode: "200"; message: "OK" }
+  | { statusCode: "201"; message: "created" }
+  | { statusCode: "404"; message: "Not found" }
+  | { statusCode: "500"; message: "server error" }
+  // | { statusCode: "401"; message: "unauthorized" };// uncomment this to check if never execution is working
 
-const response = (res: httpResponse) =>
-  res.statusCode === "200" && res.message === "OK"
-    ? console.log("this request has been successful")
-    : res.statusCode === "201" && res.message === "created"
-    ? console.log("resource successfully created")
-    : res.statusCode === "404" && res.message === "Not found"
-    ? console.log("no such resource available")
-    : console.log("server error")
 
-response({statusCode: "200", message: "OK"})
-response({statusCode: "500", message: "server error"})
+// const response = (res: httpResponse) =>
+//   res.statusCode === "200" && res.message === "OK"
+//     ? console.log("this request has been successful")
+//     : res.statusCode === "201" && res.message === "created"
+//     ? console.log("resource successfully created")
+//     : res.statusCode === "404" && res.message === "Not found"
+//     ? console.log("no such resource available")
+//     : console.log("server error")
+
+
+//*better code
+function safeResponse(res : httpResponse) {
+switch (res.statusCode) {
+    case "200":
+    case "201":
+    case "404":
+    case "500":
+      console.log(res.message);
+      break;
+    
+    default: // this will execute if we add a new case of http response but not handle it in the switch case
+      const nevercase: never = res;
+      return nevercase
+}
+}
+
+// response({statusCode: "200", message: "OK"})
+safeResponse({ statusCode: "500", message: "server error" });
+safeResponse({statusCode:"201", message: "created"})
