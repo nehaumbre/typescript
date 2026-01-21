@@ -73,17 +73,45 @@ console.log(table12.customerOrder);
 class User {
     private password: string
     public username : string
+    protected age : number
 
-    constructor(usrname:string , pass: string) {
+    constructor(usrname:string , pass: string, age: number) {
         this.username = usrname
         this.password = pass
+        this.age = age
     }
 
+    
     validatePassword(input: string): boolean{
         return this.password === input
     }
 }
 
-const user1 = new User("Yor Briar", "admin123")
+const user1 = new User("Yor Briar", "admin123",30)
+// console.log(user1.password);//  Property 'password' is private and only accessible within class 'User'.
 console.log(user1.validatePassword("admin"));
 console.log(user1.validatePassword("admin123"));
+//console.log(user1.age); //Property 'age' is protected and only accessible within class 'User' and its subclasses.
+
+class Admin extends User {
+    public role : string
+
+    constructor(username :string, password: string,age: number){
+        super(username, password, age);
+        this.role = "admin"
+    }
+
+    showProfile(){
+        return `${this.username} is ${this.age} years old`
+    }
+
+    birthday(){
+        this.age++
+        return this.age
+    }
+
+    // revealPassword(){
+    //   return this.password;
+    //   //Property 'password' is private and only accessible within class 'User'.
+    // }
+}
