@@ -115,3 +115,42 @@ class Admin extends User {
     //   //Property 'password' is private and only accessible within class 'User'.
     // }
 }
+
+//getters and setters
+//Getters and setters let you control how a property is read and changed.
+//From the outside, it looks like a normal variable.
+//Inside, you can add logic: validation, formatting, security, etc.
+
+
+class Human {
+    private _age : number = 0
+
+    //getter
+    get age(){
+       return this._age
+    }
+
+    //setter
+    set age(value: number){
+        if(value<0){
+            console.log("Age can't be negative");
+        }else{
+            this._age = value
+        }
+    }
+}
+
+const human2 = new Human()
+console.log(human2.age);
+human2.age = -10
+console.log(human2.age);
+human2.age = 30
+console.log(human2.age);
+
+/*🧠 Why use getters & setters?
+validation
+security
+formatting
+logging
+computed values
+hiding internal fields*/
