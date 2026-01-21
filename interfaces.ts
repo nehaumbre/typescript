@@ -69,3 +69,90 @@ interface Add {
 }
 
 const sum: Add = (x, y) => x + y;
+
+//another self interface example
+
+interface Anime {
+    name : string
+    genre : string
+    watchlist? : boolean
+    play() : void
+    }
+
+interface bingeAnime extends Anime {
+    addtoFav : boolean
+}
+
+let anime1 : bingeAnime = {
+    name : "Haikyu",
+    genre : "Sports",
+    watchlist : true,
+    play() {
+        console.log(`Now Playing ${this.name}`);
+    },
+    addtoFav : true
+}
+
+anime1.play()
+let anime2: bingeAnime = {
+  name: "Gintama",
+  genre: "Comedy",
+  watchlist: true,
+  play() {
+    console.log(`Now Playing ${this.name}`);
+  },
+  addtoFav: true,
+};
+anime2.play();
+
+class AnimeMovies implements Anime {
+  name: string
+  genre: string
+
+  constructor(name: string, genre: string) {
+    this.name = name;
+    this.genre = genre
+  }
+
+  play() {
+    console.log(`Anime movie to watch ${this.name}`);
+  }
+}
+
+const bingeMovie = new AnimeMovies("Suzume", "Fantasy")
+bingeMovie.play()
+
+
+//declaration merging: if you declare the same interface name more than once, TypeScript stitches them together into a single shape.
+interface Animes {
+  name: string;
+  genre: string;
+  watchlist?: boolean;
+  play(): void;
+}
+
+interface Animes {
+  rating: number;
+  episodes : number
+  pause(): void;
+}
+
+
+const naruto: Animes = {
+  name: "Naruto",
+  genre: "Action",
+  watchlist: true,
+  episodes: 220,
+  rating: 9,
+
+  play() {
+    console.log("Playing Naruto...");
+  },
+
+  pause() {
+    console.log("Paused Naruto.");
+  },
+};
+
+naruto.play()
+naruto.pause()
