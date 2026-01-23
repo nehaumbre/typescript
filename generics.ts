@@ -121,5 +121,81 @@ console.log("Generic Number Box Value set", genericNumBox.setValue(90000));
 console.log("Generic Number Box value", genericNumBox.getValue());
 console.log("=======================");
 console.log("Generic String Box Value", genericStrBox.getValue());
-console.log("Generic String Box Value set", genericStrBox.setValue("Kageyama Tobio"));
+console.log(
+  "Generic String Box Value set",
+  genericStrBox.setValue("Kageyama Tobio")
+);
 console.log("Generic String Box Value", genericStrBox.getValue());
+
+// Random Key example
+
+function getRandomKeyValuePair<T extends object>(obj: T) {
+  const keys = Object.keys(obj) as Array<keyof T>;
+
+  if (keys.length === 0) {
+    throw new Error("Object has no keys");
+  }
+
+  const randomKey = keys[Math.floor(Math.random() * keys.length)]!;
+
+  return {
+    key: randomKey,
+    value: obj[randomKey],
+  };
+}
+
+const StringObject = { a: "apple", b: "banana", c: "cheery" };
+const RandomStringPair = getRandomKeyValuePair(StringObject);
+console.log(RandomStringPair);
+
+//---------------------------------------
+function uniqueDataTypes<T>(item: T, defaultvalue: T) {
+  return [item, defaultvalue];
+}
+
+interface Dog {
+  name: string;
+  breed: string;
+}
+
+const dog1 = uniqueDataTypes<Dog>(
+  { name: "Spitz", breed: "Golden retriever" },
+  { name: "Noe", breed: "Husky" }
+);
+console.log(dog1);
+
+//=----------------------------------
+function filterArray<T>(array: T[], condition: (item: T) => boolean): T[] {
+  return array.filter((item) => condition(item));
+}
+
+const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNo = filterArray<number>(numberArr, (num) => num % 2 === 0);
+console.log(evenNo);
+const oddNo = filterArray<number>(numberArr, (num) => num % 2 != 0);
+console.log(oddNo);
+
+//* to generate random string : a-z and 0-9
+// const randomStrArr = Array.from({length:10}, ()=>Math.random().toString(36).slice(2,8))//toString() radix argument must be between 2 and 36
+// console.log(randomStrArr);
+
+//*generate random words fixed length only letters
+// const randomWord =(n:number) =>
+//   Array.from({ length: n }, () => "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random()*26)]).join("");
+// const randomStrArr = Array.from({length:10}, ()=> randomWord(4))
+// console.log(randomStrArr);
+
+//*generate random words variable length only letters
+const randomWord = (minLength = 3, maxLength = 8) =>
+  Array.from(
+    {
+      length: (Math.random() * (maxLength - minLength + 1) + minLength) | 0,
+    },
+    () => String.fromCharCode(97 + ((Math.random() * 26) | 0))
+  ).join("");
+const randomStrArr = Array.from({length:10}, ()=> randomWord())
+console.log(randomStrArr);
+const shortWords = filterArray<string>(randomStrArr,(word)=>word.length<= 6)
+console.log(shortWords);
+const longWords = filterArray<string>(randomStrArr, (word) => word.length > 6);
+console.log(longWords);
