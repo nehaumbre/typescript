@@ -193,9 +193,27 @@ const randomWord = (minLength = 3, maxLength = 8) =>
     },
     () => String.fromCharCode(97 + ((Math.random() * 26) | 0))
   ).join("");
-const randomStrArr = Array.from({length:10}, ()=> randomWord())
+const randomStrArr = Array.from({ length: 10 }, () => randomWord());
 console.log(randomStrArr);
-const shortWords = filterArray<string>(randomStrArr,(word)=>word.length<= 6)
-console.log(shortWords);
+const shortWords = filterArray<string>(
+  randomStrArr,
+  (word) => word.length <= 6
+);
+console.table(shortWords);
 const longWords = filterArray<string>(randomStrArr, (word) => word.length > 6);
-console.log(longWords);
+console.table(longWords);
+
+interface Fruit {
+  name: string;
+  color: string;
+}
+
+const fruitarray: Fruit[] = [
+  { name: "apple", color: "red" },
+  { name: "orange", color: "orange" },
+  { name: "banana", color: "yellow" },
+  { name: "cherry", color: "red" },
+];
+
+const redFruits = filterArray<Fruit>(fruitarray, (fruit)=> fruit.color ==="red")
+console.table(redFruits);
