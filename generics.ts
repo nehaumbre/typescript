@@ -186,22 +186,22 @@ console.log(oddNo);
 // console.log(randomStrArr);
 
 //*generate random words variable length only letters
-const randomWord = (minLength = 3, maxLength = 8) =>
-  Array.from(
-    {
-      length: (Math.random() * (maxLength - minLength + 1) + minLength) | 0,
-    },
-    () => String.fromCharCode(97 + ((Math.random() * 26) | 0))
-  ).join("");
-const randomStrArr = Array.from({ length: 10 }, () => randomWord());
-console.log(randomStrArr);
-const shortWords = filterArray<string>(
-  randomStrArr,
-  (word) => word.length <= 6
-);
-console.table(shortWords);
-const longWords = filterArray<string>(randomStrArr, (word) => word.length > 6);
-console.table(longWords);
+// const randomWord = (minLength = 3, maxLength = 8) =>
+//   Array.from(
+//     {
+//       length: (Math.random() * (maxLength - minLength + 1) + minLength) | 0,
+//     },
+//     () => String.fromCharCode(97 + ((Math.random() * 26) | 0))
+//   ).join("");
+// const randomStrArr = Array.from({ length: 10 }, () => randomWord());
+// console.log(randomStrArr);
+// const shortWords = filterArray<string>(
+//   randomStrArr,
+//   (word) => word.length <= 6
+// );
+// console.table(shortWords);
+// const longWords = filterArray<string>(randomStrArr, (word) => word.length > 6);
+// console.table(longWords);
 
 interface Fruit {
   name: string;

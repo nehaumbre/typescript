@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var faker_1 = require("@faker-js/faker");
 //regular function
 var printString = function (x) { return console.log(x); };
 var printNumber = function (x) { return console.log(x); };
@@ -127,33 +124,11 @@ var evenNo = filterArray(numberArr, function (num) { return num % 2 === 0; });
 console.log(evenNo);
 var oddNo = filterArray(numberArr, function (num) { return num % 2 != 0; });
 console.log(oddNo);
-//* to generate random string : a-z and 0-9
-// const randomStrArr = Array.from({length:10}, ()=>Math.random().toString(36).slice(2,8))//toString() radix argument must be between 2 and 36
-// console.log(randomStrArr);
-//*generate random words fixed length only letters
-// const randomWord =(n:number) =>
-//   Array.from({ length: n }, () => "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random()*26)]).join("");
-// const randomStrArr = Array.from({length:10}, ()=> randomWord(4))
-// console.log(randomStrArr);
-//*generate random words variable length only letters
-var randomWord = function (minLength, maxLength) {
-    if (minLength === void 0) { minLength = 3; }
-    if (maxLength === void 0) { maxLength = 8; }
-    return Array.from({
-        length: (Math.random() * (maxLength - minLength + 1) + minLength) | 0,
-    }, function () { return String.fromCharCode(97 + ((Math.random() * 26) | 0)); }).join("");
-};
-var randomStrArr = Array.from({ length: 10 }, function () { return randomWord(); });
-console.log(randomStrArr);
-var shortWords = filterArray(randomStrArr, function (word) { return word.length <= 6; });
-console.log(shortWords);
-var longWords = filterArray(randomStrArr, function (word) { return word.length > 6; });
-console.log(longWords);
-var randomFruit = function () { return ({
-    name: faker_1.faker.food.fruit(),
-    sweetness: faker_1.faker.number.int({ min: 1, max: 10 })
-}); };
-var fruitArray = Array.from({ length: 10 }, randomFruit);
-console.log(fruitArray);
-var sweetnessFruitsArray = filterArray(fruitArray, function (fruit) { return fruit.sweetness > 3; });
-console.log(sweetnessFruitsArray);
+var fruitarray = [
+    { name: "apple", color: "red" },
+    { name: "orange", color: "orange" },
+    { name: "banana", color: "yellow" },
+    { name: "cherry", color: "red" },
+];
+var redFruits = filterArray(fruitarray, function (fruit) { return fruit.color === "red"; });
+console.table(redFruits);
