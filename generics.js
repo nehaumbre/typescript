@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 //regular function
-var printString = function (x) { return console.log(x); };
-var printNumber = function (x) { return console.log(x); };
-var printBool = function (x) { return console.log(x); };
+const printString = (x) => console.log(x);
+const printNumber = (x) => console.log(x);
+const printBool = (x) => console.log(x);
 printString("this is a string in regular function");
 printNumber(3);
 printBool(true);
@@ -11,14 +13,16 @@ function printX(x) {
     return x;
 }
 //*T is a type variable:It means: whatever type goes in, the same type comes out.
-var str = printX("This is a string in generic function");
-var num = printX(1234);
-var bool = printX(false);
+const str = printX("This is a string in generic function");
+const num = printX(1234);
+const bool = printX(false);
 //
 // *TypeScript can infer the type
-var inferStr = printX("abc"); // TypeScript infers T as string
-var inferBool = printX(true); // TypeScript infers T as Boolean
-console.log("".concat(str, "\n").concat(num, " \n").concat(bool, " ").concat(inferStr, " ").concat(inferBool));
+const inferStr = printX("abc"); // TypeScript infers T as string
+const inferBool = printX(true); // TypeScript infers T as Boolean
+console.log(`${str}
+${num} 
+${bool} ${inferStr} ${inferBool}`);
 // Generics in TypeScript are how you write code
 //  that works with types as data. It says :
 //*“I don’t know who you are yet, but when you
@@ -30,40 +34,38 @@ console.log("".concat(str, "\n").concat(num, " \n").concat(bool, " ").concat(inf
 function getFirstElement(arr) {
     return arr.length > 0 ? arr[0] : undefined;
 }
-var numbers1 = [1, 2, 3, 4, 5, 6];
+const numbers1 = [1, 2, 3, 4, 5, 6];
 //const numbers2 = [] //TypeScript infers this as never[] (or any[] depending on config).
 //Better practice is to be explicit:
-var numbers2 = []; //*Now T is clearly number.
-var mixed = [{ name: "John" }, { name: "Jane" }];
+const numbers2 = []; //*Now T is clearly number.
+const mixed = [{ name: "John" }, { name: "Jane" }];
 console.log("First Element:", getFirstElement(numbers1));
 console.log("First Element:", getFirstElement(numbers2)); //undefined
 console.log("First Element:", getFirstElement(mixed));
-var NumberBox = /** @class */ (function () {
-    function NumberBox(value) {
+class NumberBox {
+    constructor(value) {
         this.value = value;
     }
-    NumberBox.prototype.getValue = function () {
+    getValue() {
         return this.value;
-    };
-    NumberBox.prototype.setValue = function (value) {
-        this.value = value;
-    };
-    return NumberBox;
-}());
-var StringBox = /** @class */ (function () {
-    function StringBox(value) {
+    }
+    setValue(value) {
         this.value = value;
     }
-    StringBox.prototype.getValue = function () {
-        return this.value;
-    };
-    StringBox.prototype.setValue = function (value) {
+}
+class StringBox {
+    constructor(value) {
         this.value = value;
-    };
-    return StringBox;
-}());
-var numBox = new NumberBox(42);
-var strBox = new StringBox("Shoyo");
+    }
+    getValue() {
+        return this.value;
+    }
+    setValue(value) {
+        this.value = value;
+    }
+}
+const numBox = new NumberBox(42);
+const strBox = new StringBox("Shoyo");
 console.log("=======================");
 console.log("Number Box value", numBox.getValue());
 console.log("Number Box Value set", numBox.setValue(9));
@@ -73,20 +75,19 @@ console.log("String Box Value", strBox.getValue());
 console.log("String Box Value set", strBox.setValue("Hinata Shoyo"));
 console.log("String Box Value", strBox.getValue());
 //Generic implementation
-var GenericBox = /** @class */ (function () {
-    function GenericBox(value) {
+class GenericBox {
+    constructor(value) {
         this.value = value;
     }
-    GenericBox.prototype.getValue = function () {
+    getValue() {
         return this.value;
-    };
-    GenericBox.prototype.setValue = function (value) {
+    }
+    setValue(value) {
         this.value = value;
-    };
-    return GenericBox;
-}());
-var genericNumBox = new GenericBox(1000000);
-var genericStrBox = new GenericBox("Kageyama");
+    }
+}
+const genericNumBox = new GenericBox(1000000);
+const genericStrBox = new GenericBox("Kageyama");
 console.log("Generic Number Box value", genericNumBox.getValue());
 console.log("Generic Number Box Value set", genericNumBox.setValue(90000));
 console.log("Generic Number Box value", genericNumBox.getValue());
@@ -96,39 +97,40 @@ console.log("Generic String Box Value set", genericStrBox.setValue("Kageyama Tob
 console.log("Generic String Box Value", genericStrBox.getValue());
 // Random Key example
 function getRandomKeyValuePair(obj) {
-    var keys = Object.keys(obj);
+    const keys = Object.keys(obj);
     if (keys.length === 0) {
         throw new Error("Object has no keys");
     }
-    var randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
     return {
         key: randomKey,
         value: obj[randomKey],
     };
 }
-var StringObject = { a: "apple", b: "banana", c: "cheery" };
-var RandomStringPair = getRandomKeyValuePair(StringObject);
+const StringObject = { a: "apple", b: "banana", c: "cheery" };
+const RandomStringPair = getRandomKeyValuePair(StringObject);
 console.log(RandomStringPair);
 //---------------------------------------
 function uniqueDataTypes(item, defaultvalue) {
     return [item, defaultvalue];
 }
-var dog1 = uniqueDataTypes({ name: "Spitz", breed: "Golden retriever" }, { name: "Noe", breed: "Husky" });
+const dog1 = uniqueDataTypes({ name: "Spitz", breed: "Golden retriever" }, { name: "Noe", breed: "Husky" });
 console.log(dog1);
 //=----------------------------------
 function filterArray(array, condition) {
-    return array.filter(function (item) { return condition(item); });
+    return array.filter((item) => condition(item));
 }
-var numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var evenNo = filterArray(numberArr, function (num) { return num % 2 === 0; });
+const numberArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNo = filterArray(numberArr, (num) => num % 2 === 0);
 console.log(evenNo);
-var oddNo = filterArray(numberArr, function (num) { return num % 2 != 0; });
+const oddNo = filterArray(numberArr, (num) => num % 2 != 0);
 console.log(oddNo);
-var fruitarray = [
+const fruitarray = [
     { name: "apple", color: "red" },
     { name: "orange", color: "orange" },
     { name: "banana", color: "yellow" },
     { name: "cherry", color: "red" },
 ];
-var redFruits = filterArray(fruitarray, function (fruit) { return fruit.color === "red"; });
+const redFruits = filterArray(fruitarray, (fruit) => fruit.color === "red");
 console.table(redFruits);
+//# sourceMappingURL=generics.js.map
